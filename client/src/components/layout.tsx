@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Activity, ShieldAlert, BookOpen, Menu, Bell } from "lucide-react";
+import { LayoutDashboard, Activity, ShieldAlert, BookOpen, Menu, Bell, AlertTriangle } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const navItems = [
     { href: "/", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/fraud", label: "Fraud Detection", icon: AlertTriangle },
     { href: "/monitor", label: "Live Monitor", icon: Activity },
     { href: "/analysis", label: "Threat Analysis", icon: ShieldAlert },
     { href: "/education", label: "Prevention & Edu", icon: BookOpen },

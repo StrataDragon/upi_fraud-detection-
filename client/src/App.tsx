@@ -8,6 +8,7 @@ import Dashboard from "@/pages/dashboard";
 import Monitor from "@/pages/monitor";
 import Analysis from "@/pages/analysis";
 import Education from "@/pages/education";
+import Fraud from "@/pages/fraud";
 
 function Router() {
   return (
@@ -16,6 +17,7 @@ function Router() {
       <Route path="/monitor" component={Monitor} />
       <Route path="/analysis" component={Analysis} />
       <Route path="/education" component={Education} />
+      <Route path="/fraud" component={Fraud} />
       <Route component={NotFound} />
     </Switch>
   );
