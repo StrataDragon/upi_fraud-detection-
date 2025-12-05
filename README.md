@@ -9,6 +9,7 @@
 ## 📋 Overview
 
 **UPI Fraud Guard** is a comprehensive fraud detection system designed to protect against sophisticated UPI scams in India. It features a 4-layer detection engine, real-time monitoring dashboard, and **new batch CSV processing** capability.
+|---------|-------------|
 **DEMO_VID**
 (https://drive.google.com/file/d/1gc4_USQ63f9TYW9PB9EGVB_xRUlwcdRe/view?usp=sharing)
 ### 🎯 Key Capabilities
