@@ -1,0 +1,151 @@
+senderUpi,receiverUpi,amount,timestamp,description,merchantName,city
+user1@upi,merchant@upi,5000,2025-12-05T10:30:00Z,Online purchase,Amazon,Delhi
+user2@upi,unknown@upi,50000,2025-12-05T10:35:00Z,Refund verification,Support Team,Mumbai
+user3@upi,delivery@upi,299,2025-12-05T10:40:00Z,Delivery payment,Flipkart,Bangalore
+user4@upi,scammer@upi,25000,2025-12-05T10:45:00Z,Urgent cash need,Emergency,Pune
+user5@upi,bank@upi,100,2025-12-05T10:50:00Z,Verification payment,RBI Verification,Hyderabad
+user6@upi,seller@upi,12000,2025-12-05T10:55:00Z,Property booking,Real Estate,Chennai
+user7@upi,rent@upi,15000,2025-12-05T11:00:00Z,Rent payment,Landlord,Kolkata
+user8@upi,job@upi,5000,2025-12-05T11:05:00Z,Training fee,Online Jobs,Pune
+user9@upi,normal@upi,2500,2025-12-05T11:10:00Z,Coffee shop,Local Cafe,Delhi
+user10@upi,fraud@upi,100000,2025-12-05T11:15:00Z,Investment opportunity,Crypto,Mumbai
+user11@upi,merchant@upi,3500,2025-12-05T11:20:00Z,Grocery shopping,BigBasket,Delhi
+user12@upi,unknown@upi,75000,2025-12-05T11:25:00Z,OTP verification required,Bank Support,Mumbai
+user13@upi,delivery@upi,450,2025-12-05T11:30:00Z,Food delivery,Zomato,Bangalore
+user14@upi,scammer@upi,35000,2025-12-05T11:35:00Z,Urgent help needed,Emergency Fund,Pune
+user15@upi,bank@upi,250,2025-12-05T11:40:00Z,KYC verification,Government,Hyderabad
+user16@upi,seller@upi,18000,2025-12-05T11:45:00Z,Car booking,OLX Motors,Chennai
+user17@upi,rent@upi,20000,2025-12-05T11:50:00Z,Monthly rent,Landlord,Kolkata
+user18@upi,job@upi,8000,2025-12-05T11:55:00Z,Work from home training,Online Academy,Pune
+user19@upi,normal@upi,1200,2025-12-05T12:00:00Z,Restaurant bill,Taj Hotel,Delhi
+user20@upi,fraud@upi,150000,2025-12-05T12:05:00Z,Lottery prize claim,Lucky Draw,Mumbai
+user21@upi,merchant@upi,6500,2025-12-05T12:10:00Z,Electronics purchase,Croma,Delhi
+user22@upi,unknown@upi,55000,2025-12-05T12:15:00Z,Aadhar verification,Government Portal,Mumbai
+user23@upi,delivery@upi,599,2025-12-05T12:20:00Z,Package delivery,Swiggy,Bangalore
+user24@upi,scammer@upi,45000,2025-12-05T12:25:00Z,Medical emergency,Hospital,Pune
+user25@upi,bank@upi,500,2025-12-05T12:30:00Z,PAN verification,Tax Department,Hyderabad
+user26@upi,seller@upi,22000,2025-12-05T12:35:00Z,Jewelry purchase,Tanishq,Chennai
+user27@upi,rent@upi,25000,2025-12-05T12:40:00Z,Rent deposit,Landlord,Kolkata
+user28@upi,job@upi,12000,2025-12-05T12:45:00Z,Certification course fee,Udemy,Pune
+user29@upi,normal@upi,3200,2025-12-05T12:50:00Z,Movie tickets,BookMyShow,Delhi
+user30@upi,fraud@upi,200000,2025-12-05T12:55:00Z,Business investment,Startup Fund,Mumbai
+user31@upi,merchant@upi,4200,2025-12-05T13:00:00Z,Clothing purchase,Myntra,Delhi
+user32@upi,unknown@upi,65000,2025-12-05T13:05:00Z,Processing fee payment,Bank,Mumbai
+user33@upi,delivery@upi,750,2025-12-05T13:10:00Z,Courier service,DHL,Bangalore
+user34@upi,scammer@upi,55000,2025-12-05T13:15:00Z,Accident assistance,Police,Pune
+user35@upi,bank@upi,1000,2025-12-05T13:20:00Z,Tax payment,Income Tax,Hyderabad
+user36@upi,seller@upi,28000,2025-12-05T13:25:00Z,Furniture purchase,Urban Ladder,Chennai
+user37@upi,rent@upi,30000,2025-12-05T13:30:00Z,Rent payment,Landlord,Kolkata
+user38@upi,job@upi,15000,2025-12-05T13:35:00Z,Skill development fee,LinkedIn Learning,Pune
+user39@upi,normal@upi,2800,2025-12-05T13:40:00Z,Gym membership,Fitness First,Delhi
+user40@upi,fraud@upi,250000,2025-12-05T13:45:00Z,Real estate investment,Property Deal,Mumbai
+user41@upi,merchant@upi,7500,2025-12-05T14:00:00Z,Mobile phone purchase,Oneplus,Delhi
+user42@upi,unknown@upi,85000,2025-12-05T14:05:00Z,Refund claim processing,Support,Mumbai
+user43@upi,delivery@upi,899,2025-12-05T14:10:00Z,Express delivery,FedEx,Bangalore
+user44@upi,scammer@upi,65000,2025-12-05T14:15:00Z,Urgent loan needed,Finance,Pune
+user45@upi,bank@upi,1500,2025-12-05T14:20:00Z,Fine payment,Traffic,Hyderabad
+user46@upi,seller@upi,32000,2025-12-05T14:25:00Z,Laptop purchase,Dell,Chennai
+user47@upi,rent@upi,35000,2025-12-05T14:30:00Z,Rent payment,Landlord,Kolkata
+user48@upi,job@upi,18000,2025-12-05T14:35:00Z,Bootcamp enrollment,Coding Ninjas,Pune
+user49@upi,normal@upi,4500,2025-12-05T14:40:00Z,Insurance premium,HDFC Life,Delhi
+user50@upi,fraud@upi,300000,2025-12-05T14:45:00Z,Cryptocurrency investment,Crypto Exchange,Mumbai
+user51@upi,merchant@upi,2100,2025-12-05T15:00:00Z,Pharmacy purchase,Apollo,Delhi
+user52@upi,unknown@upi,95000,2025-12-05T15:05:00Z,Urgent verification,Bank,Mumbai
+user53@upi,delivery@upi,1200,2025-12-05T15:10:00Z,Logistics service,Blue Dart,Bangalore
+user54@upi,scammer@upi,75000,2025-12-05T15:15:00Z,Help needed urgently,Emergency,Pune
+user55@upi,bank@upi,2000,2025-12-05T15:20:00Z,Penalty payment,Court,Hyderabad
+user56@upi,seller@upi,38000,2025-12-05T15:25:00Z,Camera purchase,Canon,Chennai
+user57@upi,rent@upi,40000,2025-12-05T15:30:00Z,Rent payment,Landlord,Kolkata
+user58@upi,job@upi,22000,2025-12-05T15:35:00Z,MBA course fee,IIMA,Pune
+user59@upi,normal@upi,5600,2025-12-05T15:40:00Z,Travel booking,MakeMyTrip,Delhi
+user60@upi,fraud@upi,350000,2025-12-05T15:45:00Z,Stock market investment,Broker,Mumbai
+user61@upi,merchant@upi,8900,2025-12-05T16:00:00Z,Appliance purchase,LG,Delhi
+user62@upi,unknown@upi,105000,2025-12-05T16:05:00Z,Claim verification,Insurance,Mumbai
+user63@upi,delivery@upi,1500,2025-12-05T16:10:00Z,Parcel delivery,Delhivery,Bangalore
+user64@upi,scammer@upi,85000,2025-12-05T16:15:00Z,Urgent assistance,Help Desk,Pune
+user65@upi,bank@upi,2500,2025-12-05T16:20:00Z,Penalty fine,Police,Hyderabad
+user66@upi,seller@upi,42000,2025-12-05T16:25:00Z,Watch purchase,Titan,Chennai
+user67@upi,rent@upi,45000,2025-12-05T16:30:00Z,Rent payment,Landlord,Kolkata
+user68@upi,job@upi,25000,2025-12-05T16:35:00Z,Professional certification,Google,Pune
+user69@upi,normal@upi,6800,2025-12-05T16:40:00Z,Hotel booking,OYO,Delhi
+user70@upi,fraud@upi,400000,2025-12-05T16:45:00Z,Business loan,Bank,Mumbai
+user71@upi,merchant@upi,3300,2025-12-05T17:00:00Z,Book purchase,Amazon,Delhi
+user72@upi,unknown@upi,115000,2025-12-05T17:05:00Z,Refund processing,Support Team,Mumbai
+user73@upi,delivery@upi,1800,2025-12-05T17:10:00Z,Courier service,DTDC,Bangalore
+user74@upi,scammer@upi,95000,2025-12-05T17:15:00Z,Urgent help,Emergency,Pune
+user75@upi,bank@upi,3000,2025-12-05T17:20:00Z,Tax fine,Government,Hyderabad
+user76@upi,seller@upi,48000,2025-12-05T17:25:00Z,Perfume purchase,Guerlain,Chennai
+user77@upi,rent@upi,50000,2025-12-05T17:30:00Z,Rent payment,Landlord,Kolkata
+user78@upi,job@upi,28000,2025-12-05T17:35:00Z,Advanced training,Coursera,Pune
+user79@upi,normal@upi,7200,2025-12-05T17:40:00Z,Flight booking,Indigo,Delhi
+user80@upi,fraud@upi,450000,2025-12-05T17:45:00Z,Investment portfolio,Fund Manager,Mumbai
+user81@upi,merchant@upi,9500,2025-12-05T18:00:00Z,Gaming console,PlayStation,Delhi
+user82@upi,unknown@upi,125000,2025-12-05T18:05:00Z,Urgent claim,Bank,Mumbai
+user83@upi,delivery@upi,2100,2025-12-05T18:10:00Z,Express delivery,Shadowfax,Bangalore
+user84@upi,scammer@upi,105000,2025-12-05T18:15:00Z,Urgent assistance,Support,Pune
+user85@upi,bank@upi,3500,2025-12-05T18:20:00Z,Penalty payment,Court,Hyderabad
+user86@upi,seller@upi,52000,2025-12-05T18:25:00Z,Handbag purchase,Louis Vuitton,Chennai
+user87@upi,rent@upi,55000,2025-12-05T18:30:00Z,Rent payment,Landlord,Kolkata
+user88@upi,job@upi,32000,2025-12-05T18:35:00Z,Executive program,IIM,Pune
+user89@upi,normal@upi,8400,2025-12-05T18:40:00Z,Train booking,IRCTC,Delhi
+user90@upi,fraud@upi,500000,2025-12-05T18:45:00Z,Real estate deal,Developer,Mumbai
+user91@upi,merchant@upi,4800,2025-12-05T19:00:00Z,Headphones purchase,Sony,Delhi
+user92@upi,unknown@upi,135000,2025-12-05T19:05:00Z,Verification claim,Bank,Mumbai
+user93@upi,delivery@upi,2400,2025-12-05T19:10:00Z,Logistics service,Ecom Express,Bangalore
+user94@upi,scammer@upi,115000,2025-12-05T19:15:00Z,Urgent help needed,Emergency,Pune
+user95@upi,bank@upi,4000,2025-12-05T19:20:00Z,Fine payment,Traffic,Hyderabad
+user96@upi,seller@upi,56000,2025-12-05T19:25:00Z,Shoes purchase,Nike,Chennai
+user97@upi,rent@upi,60000,2025-12-05T19:30:00Z,Rent payment,Landlord,Kolkata
+user98@upi,job@upi,35000,2025-12-05T19:35:00Z,Leadership program,Harvard,Pune
+user99@upi,normal@upi,9600,2025-12-05T19:40:00Z,Bus booking,Redbus,Delhi
+user100@upi,fraud@upi,550000,2025-12-05T19:45:00Z,Venture capital investment,VC Fund,Mumbai
+user101@upi,merchant@upi,1500,2025-12-05T20:00:00Z,Snacks purchase,Haldirams,Delhi
+user102@upi,unknown@upi,145000,2025-12-05T20:05:00Z,Urgent verification,Support,Mumbai
+user103@upi,delivery@upi,2700,2025-12-05T20:10:00Z,Parcel service,Gati,Bangalore
+user104@upi,scammer@upi,125000,2025-12-05T20:15:00Z,Urgent assistance,Help,Pune
+user105@upi,bank@upi,4500,2025-12-05T20:20:00Z,Penalty fine,Police,Hyderabad
+user106@upi,seller@upi,60000,2025-12-05T20:25:00Z,Dress purchase,Sabyasachi,Chennai
+user107@upi,rent@upi,65000,2025-12-05T20:30:00Z,Rent payment,Landlord,Kolkata
+user108@upi,job@upi,38000,2025-12-05T20:35:00Z,Doctorate program,Stanford,Pune
+user109@upi,normal@upi,10800,2025-12-05T20:40:00Z,Cab booking,Uber,Delhi
+user110@upi,fraud@upi,600000,2025-12-05T20:45:00Z,Private equity deal,PE Firm,Mumbai
+user111@upi,merchant@upi,6200,2025-12-05T21:00:00Z,Furniture purchase,IKEA,Delhi
+user112@upi,unknown@upi,155000,2025-12-05T21:05:00Z,Claim processing,Insurance,Mumbai
+user113@upi,delivery@upi,3000,2025-12-05T21:10:00Z,Courier delivery,Aramex,Bangalore
+user114@upi,scammer@upi,135000,2025-12-05T21:15:00Z,Urgent help,Emergency,Pune
+user115@upi,bank@upi,5000,2025-12-05T21:20:00Z,Tax payment,Government,Hyderabad
+user116@upi,seller@upi,64000,2025-12-05T21:25:00Z,Jewelry purchase,Malabar Gold,Chennai
+user117@upi,rent@upi,70000,2025-12-05T21:30:00Z,Rent payment,Landlord,Kolkata
+user118@upi,job@upi,42000,2025-12-05T21:35:00Z,Executive MBA,XLRI,Pune
+user119@upi,normal@upi,12000,2025-12-05T21:40:00Z,Bike booking,Ola,Delhi
+user120@upi,fraud@upi,650000,2025-12-05T21:45:00Z,Merger acquisition,Investment Bank,Mumbai
+user121@upi,merchant@upi,7800,2025-12-05T22:00:00Z,Electronics purchase,Samsung,Delhi
+user122@upi,unknown@upi,165000,2025-12-05T22:05:00Z,Urgent verification,Bank,Mumbai
+user123@upi,delivery@upi,3300,2025-12-05T22:10:00Z,Express delivery,Shiprocket,Bangalore
+user124@upi,scammer@upi,145000,2025-12-05T22:15:00Z,Urgent assistance,Support,Pune
+user125@upi,bank@upi,5500,2025-12-05T22:20:00Z,Penalty payment,Court,Hyderabad
+user126@upi,seller@upi,68000,2025-12-05T22:25:00Z,Luxury watch,Rolex,Chennai
+user127@upi,rent@upi,75000,2025-12-05T22:30:00Z,Rent payment,Landlord,Kolkata
+user128@upi,job@upi,45000,2025-12-05T22:35:00Z,Advanced certification,MIT,Pune
+user129@upi,normal@upi,13200,2025-12-05T22:40:00Z,Auto booking,Rapido,Delhi
+user130@upi,fraud@upi,700000,2025-12-05T22:45:00Z,Hedge fund investment,Fund Manager,Mumbai
+user131@upi,merchant@upi,2800,2025-12-05T23:00:00Z,Beverage purchase,Coca Cola,Delhi
+user132@upi,unknown@upi,175000,2025-12-05T23:05:00Z,Claim verification,Support,Mumbai
+user133@upi,delivery@upi,3600,2025-12-05T23:10:00Z,Logistics service,Allcargo,Bangalore
+user134@upi,scammer@upi,155000,2025-12-05T23:15:00Z,Urgent help,Emergency,Pune
+user135@upi,bank@upi,6000,2025-12-05T23:20:00Z,Fine payment,Police,Hyderabad
+user136@upi,seller@upi,72000,2025-12-05T23:25:00Z,Designer shoes,Prada,Chennai
+user137@upi,rent@upi,80000,2025-12-05T23:30:00Z,Rent payment,Landlord,Kolkata
+user138@upi,job@upi,48000,2025-12-05T23:35:00Z,Professional development,Yale,Pune
+user139@upi,normal@upi,14400,2025-12-05T23:40:00Z,Scooter booking,Bounce,Delhi
+user140@upi,fraud@upi,750000,2025-12-05T23:45:00Z,Acquisition deal,Corporate,Mumbai
+user141@upi,merchant@upi,3500,2025-12-06T00:00:00Z,Snack purchase,Lay's,Delhi
+user142@upi,unknown@upi,185000,2025-12-06T00:05:00Z,Urgent claim,Bank,Mumbai
+user143@upi,delivery@upi,3900,2025-12-06T00:10:00Z,Parcel delivery,Xpressbees,Bangalore
+user144@upi,scammer@upi,165000,2025-12-06T00:15:00Z,Urgent assistance,Help,Pune
+user145@upi,bank@upi,6500,2025-12-06T00:20:00Z,Tax fine,Government,Hyderabad
+user146@upi,seller@upi,76000,2025-12-06T00:25:00Z,Luxury bag,Gucci,Chennai
+user147@upi,rent@upi,85000,2025-12-06T00:30:00Z,Rent payment,Landlord,Kolkata
+user148@upi,job@upi,52000,2025-12-06T00:35:00Z,Executive training,Oxford,Pune
+user149@upi,normal@upi,15600,2025-12-06T00:40:00Z,Taxi booking,Meru,Delhi
+user150@upi,fraud@upi,800000,2025-12-06T00:45:00Z,Strategic investment,Investment Firm,Mumbai
