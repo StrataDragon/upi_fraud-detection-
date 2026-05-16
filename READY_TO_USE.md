@@ -1,8 +1,4 @@
-# 🎉 READY TO USE - UPI Fraud Guard v2.0.0
 
-## ✅ System Status: RUNNING
-
-Your UPI Fraud Guard system is now **fully operational** with all new features!
 
 ---
 
