@@ -5,3 +5,6 @@ shap
 networkx
 pandas
 pydantic
+joblib
+xgboost
+lightgbm

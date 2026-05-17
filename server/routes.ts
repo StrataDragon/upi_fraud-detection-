@@ -102,18 +102,6 @@ export async function registerRoutes(
     try {
       const data = submitTransactionSchema.parse(req.body);
 
-      // Idempotency check
-      const existing = await db
-        .select()
-        .from(upiTransactions)
-        .where(eq(upiTransactions.transactionId, data.transactionId))
-        .limit(1)
-        .then((r: any[]) => r[0]);
-
-      if (existing) {
-        return res.status(409).json({ error: "Transaction already submitted" });
-      }
-
       // Asynchronously add edge to Python DeepGraph sidecar
       fetch("http://127.0.0.1:8000/add_edge", {
         method: "POST",

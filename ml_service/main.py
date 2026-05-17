@@ -6,21 +6,36 @@ import joblib
 import pandas as pd
 import numpy as np
 import networkx as nx
+import concurrent.futures
 from fastapi import FastAPI, BackgroundTasks
 from pydantic import BaseModel
 from typing import List, Dict, Any
 import shap
 import uvicorn
 
-# Load IsolationForest model
-try:
-    model = joblib.load("iso_forest.joblib")
-    # Initialize a fast TreeExplainer for the Isolation Forest
-    explainer = shap.TreeExplainer(model)
-except Exception as e:
-    print("Warning: Could not load iso_forest.joblib. Did you run train_model.py?")
-    model = None
-    explainer = None
+models = {}
+explainers = {}
+
+model_files = {
+    'rf': 'rf_model.joblib',
+    'xgb': 'xgb_model.joblib',
+    'lgb': 'lgb_model.joblib',
+    'iso': 'iso_forest.joblib',
+    'ocsvm': 'ocsvm.joblib',
+    'lof': 'lof.joblib'
+}
+
+for name, filename in model_files.items():
+    try:
+        models[name] = joblib.load(filename)
+        print(f"Loaded {filename}")
+        if name in ['rf', 'xgb', 'lgb']: # Tree models
+            try:
+                explainers[name] = shap.TreeExplainer(models[name])
+            except Exception:
+                pass
+    except Exception as e:
+        print(f"Warning: Could not load {filename}. {e}")
 
 # NetworkX Graph for DeepGraph feature
 G = nx.DiGraph()
@@ -53,8 +68,8 @@ app = FastAPI(title="UPI Fraud ML Sidecar")
 
 @app.post("/predict")
 def predict_fraud(features: TransactionFeatures):
-    if model is None:
-        return {"error": "Model not loaded"}
+    if not models:
+        return {"error": "No models loaded"}
 
     # Convert features to DataFrame to match training
     feature_dict = features.dict()
@@ -64,45 +79,59 @@ def predict_fraud(features: TransactionFeatures):
             feature_dict[k] = int(v)
             
     df = pd.DataFrame([feature_dict])
-    
-    # 1 is normal, -1 is anomalous
-    pred = model.predict(df)[0]
-    # Decision function returns lower scores for anomalies
-    score = model.decision_function(df)[0]
-    
-    # Convert score to a 0-100 probability. 
-    # decision_function typically returns values between -0.5 and 0.5.
-    # We want lower/negative values to be high probability of fraud.
-    # Normalizing it:
-    prob = float(max(0, min(100, 50 - (score * 100))))
-    
-    # Generate SHAP explanations
-    shap_values = explainer.shap_values(df)
-    
-    # Extract top contributing features to the anomaly
-    # SHAP values for IsoForest: negative values push prediction towards -1 (anomaly)
-    # We want to find the most negative SHAP values.
     feature_names = df.columns.tolist()
-    shap_vals = shap_values[0] if isinstance(shap_values, list) else shap_values[0]
-    
-    contributions = []
-    for i, name in enumerate(feature_names):
-        # We only care about features pushing the score down (towards fraud)
-        if shap_vals[i] < 0:
-            contributions.append({"feature": name, "impact": abs(float(shap_vals[i]))})
-            
-    # Sort by highest impact
-    contributions = sorted(contributions, key=lambda x: x["impact"], reverse=True)
-    
-    top_reasons = []
-    for contrib in contributions[:3]: # top 3 reasons
-        top_reasons.append(f"High risk driven by {contrib['feature']} anomaly")
+
+    def _predict(name, model):
+        if name in ['rf', 'xgb', 'lgb']: # Supervised
+            try:
+                probs = model.predict_proba(df)[0]
+                fraud_prob = float(probs[1]) if probs.shape[0] > 1 else float(probs[0])
+            except Exception:
+                pred_label = int(model.predict(df)[0])
+                fraud_prob = 1.0 if pred_label == 1 else 0.0
+            return {'name': name, 'prob': float(fraud_prob * 100)}
+        else: # Unsupervised
+            try:
+                score = model.decision_function(df)[0]
+                prob = float(max(0, min(100, 50 - (score * 100))))
+            except Exception:
+                prob = 50.0
+            return {'name': name, 'prob': prob}
+
+    results = []
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        futures = [executor.submit(_predict, name, model) for name, model in models.items()]
+        for future in concurrent.futures.as_completed(futures):
+            results.append(future.result())
+
+    # Aggregate probabilities
+    avg_prob = sum(r['prob'] for r in results) / len(results) if results else 0
+    is_fraud = int(avg_prob > 50)
+    rawScore = avg_prob / 100.0
+
+    shapReasons = []
+    for name, explainer in explainers.items():
+        try:
+            shap_values = explainer.shap_values(df)
+            sv = shap_values[1] if isinstance(shap_values, list) and len(shap_values) > 1 else shap_values
+            sv = sv[0] if isinstance(sv, (list, np.ndarray)) and hasattr(sv, '__len__') else sv
+            contribs = []
+            for i, fname in enumerate(feature_names):
+                if sv[i] > 0:
+                    contribs.append({"feature": fname, "impact": abs(float(sv[i]))})
+            contribs = sorted(contribs, key=lambda x: x["impact"], reverse=True)
+            for c in contribs[:3]:
+                shapReasons.append(f"High risk driven by {c['feature']} (via {name})")
+            break # one explanation is enough
+        except Exception:
+            continue
 
     return {
-        "mlProbability": prob,
-        "isAnomaly": int(pred == -1),
-        "shapReasons": top_reasons,
-        "rawScore": float(score)
+        "mlProbability": float(avg_prob),
+        "isFraud": is_fraud,
+        "shapReasons": shapReasons[:3],
+        "rawScore": rawScore,
+        "ensembleDetails": results
     }
 
 @app.post("/add_edge")

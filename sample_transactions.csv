@@ -9,3 +9,4 @@ user7@upi,rent@upi,15000,2025-12-05T11:00:00Z,Rent payment,Landlord,Kolkata
 user8@upi,job@upi,5000,2025-12-05T11:05:00Z,Training fee,Online Jobs,Pune
 user9@upi,normal@upi,2500,2025-12-05T11:10:00Z,Coffee shop,Local Cafe,Delhi
 user10@upi,fraud@upi,100000,2025-12-05T11:15:00Z,Investment opportunity,Crypto,Mumbai
+mule1@upi,receiver1@upi,85000,2025-12-05T11:20:00Z,Commission payout,Mule Transfer,Delhi

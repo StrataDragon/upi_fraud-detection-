@@ -4,12 +4,26 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { PlayCircle, ShieldCheck, BookOpen, Smartphone, RefreshCcw, Users, Siren, BadgeCheck, ScanSearch, PhoneCall, ArrowRight, CheckCircle2 } from "lucide-react";
+import {
+  PlayCircle,
+  ShieldCheck,
+  BookOpen,
+  Smartphone,
+  RefreshCcw,
+  Users,
+  Siren,
+  BadgeCheck,
+  ScanSearch,
+  PhoneCall,
+  ArrowRight,
+  CheckCircle2,
+} from "lucide-react";
 
 const EDUCATIONAL_CONTENT = [
   {
     title: "The 'Refund' Trap",
-    description: "Scammers claim they are refunding money but actually send a 'Request Money' link. Entering your PIN authorizes a debit, not a credit.",
+    description:
+      "Scammers claim they are refunding money but actually send a 'Request Money' link. Entering your PIN authorizes a debit, not a credit.",
     riskLevel: "High",
     tell: "Any refund that asks for your UPI PIN is a payment, not a credit.",
     safeResponse: "Reject the request, close the app, and contact the merchant or platform through its official number.",
@@ -17,7 +31,8 @@ const EDUCATIONAL_CONTENT = [
   },
   {
     title: "QR Code Swapping",
-    description: "Fraudsters paste their own QR codes over legitimate merchant codes. Always verify the merchant name before paying.",
+    description:
+      "Fraudsters paste their own QR codes over legitimate merchant codes. Always verify the merchant name before paying.",
     riskLevel: "Medium",
     tell: "Check the merchant name on-screen before approving the transfer.",
     safeResponse: "Ask the merchant to confirm the receiver name out loud and compare it before approving payment.",
@@ -25,7 +40,8 @@ const EDUCATIONAL_CONTENT = [
   },
   {
     title: "The 'Relative in Distress'",
-    description: "AI voice cloning is used to impersonate family members asking for urgent money. Verify by calling the person directly.",
+    description:
+      "AI voice cloning is used to impersonate family members asking for urgent money. Verify by calling the person directly.",
     riskLevel: "Critical",
     tell: "Panic, urgency, and a new account are the classic giveaway trio.",
     safeResponse: "Pause immediately, call back on a saved number, and confirm through a second family member if needed.",
@@ -70,12 +86,66 @@ const walkthroughSteps = [
   "Use a saved callback number if the request sounds urgent or emotional.",
 ];
 
+const EDUCATION_VIDEO = {
+  title: "UPI safety training clip",
+  videoUrl: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+  campaign:
+    "NPCI's November 6, 2024 campaign release says Main Moorkh Nahi Hoon uses ad films to teach users how to spot common UPI scams.",
+  links: [
+    {
+      label: "NPCI fraud awareness guide",
+      href: "https://www.npci.org.in/npci-in-news/knowledge-centre/fraud-awareness",
+    },
+    {
+      label: "NPCI campaign press release",
+      href: "https://www.npci.org.in/PDF/npci/press-releases/2024/NPCI-Press-release-NPCI-Unveils-UPI-Safety-Awareness-Campaign-to-Champion-Safe-Digital-Payment-Practices.pdf",
+    },
+  ],
+};
+
+const simulationChoices = [
+  {
+    label: "Scan the QR and pay the fee immediately",
+    isCorrect: false,
+    feedback: "Unsafe. A random caller should never control your payment flow, and QR plus PIN entry can authorize a debit.",
+  },
+  {
+    label: "Ask for the parcel company name and verify it in the official app or website",
+    isCorrect: true,
+    feedback: "Correct. Independent verification breaks the scammer's urgency and keeps the payment decision in your control.",
+  },
+  {
+    label: "Share your screen so the caller can help finish the payment",
+    isCorrect: false,
+    feedback: "Unsafe. Screen-sharing helps a fraudster observe or direct sensitive payment steps.",
+  },
+];
+
 export default function Education() {
   const [selectedPattern, setSelectedPattern] = useState(EDUCATIONAL_CONTENT[0]);
-  const [trainingStep, setTrainingStep] = useState(0);
+  const [trainingStep, setTrainingStep] = useState(-1);
   const [simulationStarted, setSimulationStarted] = useState(false);
+  const [selectedChoice, setSelectedChoice] = useState<number | null>(null);
 
-  const completion = useMemo(() => Math.round(((trainingStep + 1) / walkthroughSteps.length) * 100), [trainingStep]);
+  const completion = useMemo(
+    () => (trainingStep < 0 ? 0 : Math.round(((trainingStep + 1) / walkthroughSteps.length) * 100)),
+    [trainingStep],
+  );
+  const walkthroughComplete = trainingStep >= walkthroughSteps.length - 1;
+
+  const handleWalkthroughAdvance = () => {
+    setTrainingStep((step) => (step < walkthroughSteps.length - 1 ? step + 1 : step));
+  };
+
+  const handleSimulationToggle = () => {
+    setSimulationStarted((open) => {
+      const next = !open;
+      if (!next) {
+        setSelectedChoice(null);
+      }
+      return next;
+    });
+  };
 
   return (
     <Layout>
@@ -130,9 +200,11 @@ export default function Education() {
                         index <= trainingStep ? "border-sky-200 bg-sky-50/90" : "border-slate-200 bg-white/80"
                       }`}
                     >
-                      <div className={`flex h-9 w-9 items-center justify-center rounded-xl text-sm font-mono font-bold ${
-                        index <= trainingStep ? "bg-sky-600 text-white" : "bg-slate-100 text-slate-600"
-                      }`}>
+                      <div
+                        className={`flex h-9 w-9 items-center justify-center rounded-xl text-sm font-mono font-bold ${
+                          index <= trainingStep ? "bg-sky-600 text-white" : "bg-slate-100 text-slate-600"
+                        }`}
+                      >
                         0{index + 1}
                       </div>
                       <p className={`text-sm ${index <= trainingStep ? "text-slate-950" : "text-slate-600"}`}>{step}</p>
@@ -153,14 +225,19 @@ export default function Education() {
                 <div className="flex gap-3">
                   <Button
                     className="flex-1 rounded-2xl bg-sky-600 text-white hover:bg-sky-700"
-                    onClick={() => setTrainingStep((step) => Math.min(step + 1, walkthroughSteps.length - 1))}
+                    onClick={handleWalkthroughAdvance}
+                    disabled={walkthroughComplete}
                   >
-                    Start guided safety walkthrough
+                    {trainingStep < 0
+                      ? "Start guided safety walkthrough"
+                      : walkthroughComplete
+                        ? "Walkthrough complete"
+                        : "Continue walkthrough"}
                   </Button>
                   <Button
                     variant="outline"
                     className="rounded-2xl border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-                    onClick={() => setTrainingStep(0)}
+                    onClick={() => setTrainingStep(-1)}
                   >
                     Reset
                   </Button>
@@ -237,26 +314,51 @@ export default function Education() {
                 <CardTitle className="mt-3 text-2xl text-slate-950">Interactive simulation</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="relative aspect-video overflow-hidden rounded-[24px] border border-slate-200 bg-[linear-gradient(135deg,rgba(186,230,253,0.95),rgba(248,250,252,0.98)_45%,rgba(220,252,231,0.92))]">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.45),transparent_42%)]" />
-                  <div className="relative flex h-full flex-col justify-between p-5">
-                    <div className="flex items-center justify-between">
-                      <span className="rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-slate-600">
-                        Scenario 01
-                      </span>
-                      <PlayCircle className="h-11 w-11 text-sky-700" />
-                    </div>
-                    <div>
-                      <p className="text-xl font-display font-bold text-slate-950">The Fake Delivery Agent</p>
-                      <p className="mt-2 max-w-sm text-sm leading-6 text-slate-600">
-                        A caller asks you to scan a QR code for a missed parcel fee. The right move is to verify the merchant and refuse any urgent PIN entry.
-                      </p>
-                    </div>
+                <div className="overflow-hidden rounded-[24px] border border-slate-200 bg-[linear-gradient(135deg,rgba(186,230,253,0.95),rgba(248,250,252,0.98)_45%,rgba(220,252,231,0.92))]">
+                  <div className="relative overflow-hidden pb-[56.25%]">
+                    <video
+                      className="absolute inset-0 h-full w-full bg-black object-cover"
+                      src={EDUCATION_VIDEO.videoUrl}
+                      title={EDUCATION_VIDEO.title}
+                      controls
+                      preload="metadata"
+                      playsInline
+                    />
+                  </div>
+                  <div className="flex items-center justify-between px-5 pt-5">
+                    <span className="rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-slate-600">
+                      Scenario 01
+                    </span>
+                    <PlayCircle className="h-11 w-11 text-sky-700" />
+                  </div>
+                  <div className="px-5 pb-5 pt-4">
+                    <p className="text-xl font-display font-bold text-slate-950">The Fake Delivery Agent</p>
+                    <p className="mt-2 max-w-sm text-sm leading-6 text-slate-600">
+                      A caller asks you to scan a QR code for a missed parcel fee. The right move is to verify the merchant and refuse any urgent PIN entry.
+                    </p>
                   </div>
                 </div>
+
+                <div className="mt-3">
+                  <p className="text-sm text-slate-600">{EDUCATION_VIDEO.campaign}</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {EDUCATION_VIDEO.links.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
                 <Button
                   className="mt-4 w-full rounded-2xl bg-emerald-600 text-white hover:bg-emerald-700"
-                  onClick={() => setSimulationStarted((open) => !open)}
+                  onClick={handleSimulationToggle}
                 >
                   {simulationStarted ? "Hide training simulation" : "Launch training simulation"}
                 </Button>
@@ -265,12 +367,44 @@ export default function Education() {
                   <div className="mt-4 rounded-[24px] border border-slate-200 bg-slate-50/90 p-4">
                     <p className="text-xs font-mono uppercase tracking-[0.18em] text-slate-500">Simulation prompt</p>
                     <p className="mt-3 text-base font-semibold text-slate-950">
-                      “Sir, your package is stuck. Scan this QR to release it right now.”
+                      "Sir, your package is stuck. Scan this QR to release it right now."
                     </p>
+                    <div className="mt-4 grid gap-2">
+                      {simulationChoices.map((choice, index) => {
+                        const isSelected = selectedChoice === index;
+                        return (
+                          <button
+                            key={choice.label}
+                            type="button"
+                            onClick={() => setSelectedChoice(index)}
+                            className={`rounded-2xl border px-4 py-3 text-left text-sm transition-colors ${
+                              isSelected
+                                ? choice.isCorrect
+                                  ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+                                  : "border-rose-200 bg-rose-50 text-rose-800"
+                                : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                            }`}
+                          >
+                            {choice.label}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    {selectedChoice !== null && (
+                      <div
+                        className={`mt-4 rounded-2xl border p-4 text-sm leading-6 ${
+                          simulationChoices[selectedChoice].isCorrect
+                            ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+                            : "border-rose-200 bg-rose-50 text-rose-800"
+                        }`}
+                      >
+                        {simulationChoices[selectedChoice].feedback}
+                      </div>
+                    )}
                     <div className="mt-4 flex flex-wrap gap-2">
-                      <Badge className="bg-rose-100 text-rose-700">Wrong: Scan immediately</Badge>
-                      <Badge className="bg-emerald-100 text-emerald-700">Right: Verify merchant first</Badge>
-                      <Badge className="bg-sky-100 text-sky-700">Right: Never enter PIN for fees from random callers</Badge>
+                      <Badge className="bg-rose-100 text-rose-700">Wrong: scan immediately</Badge>
+                      <Badge className="bg-emerald-100 text-emerald-700">Right: verify independently first</Badge>
+                      <Badge className="bg-sky-100 text-sky-700">Right: never enter your PIN for a stranger's fee request</Badge>
                     </div>
                   </div>
                 )}
@@ -357,7 +491,7 @@ export default function Education() {
                   <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-700">Outcome</p>
                 </div>
                 <p className="mt-3 text-sm leading-6 text-slate-700">
-                  This practice module now updates when you click any “Practice response” button in the fraud playbook, so each scenario has a working response flow.
+                  This practice module now updates when you click any "Practice response" button in the fraud playbook, so each scenario has a working response flow.
                 </p>
               </div>
             </CardContent>

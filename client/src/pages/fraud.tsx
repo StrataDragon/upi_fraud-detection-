@@ -127,7 +127,7 @@ export default function FraudPage() {
 
     try {
       const body = {
-        transactionId: `TX-MANUAL-${Date.now()}`,
+        transactionId: `TX-MANUAL-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
         senderUpi: form.senderUpi,
         receiverUpi: form.receiverUpi,
         amount: parseFloat(form.amount),
