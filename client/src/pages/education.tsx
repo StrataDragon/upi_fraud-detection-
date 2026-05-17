@@ -17,7 +17,9 @@ import {
   PhoneCall,
   ArrowRight,
   CheckCircle2,
+  Video
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const EDUCATIONAL_CONTENT = [
   {
@@ -87,20 +89,9 @@ const walkthroughSteps = [
 ];
 
 const EDUCATION_VIDEO = {
-  title: "UPI safety training clip",
-  videoUrl: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-  campaign:
-    "NPCI's November 6, 2024 campaign release says Main Moorkh Nahi Hoon uses ad films to teach users how to spot common UPI scams.",
-  links: [
-    {
-      label: "NPCI fraud awareness guide",
-      href: "https://www.npci.org.in/npci-in-news/knowledge-centre/fraud-awareness",
-    },
-    {
-      label: "NPCI campaign press release",
-      href: "https://www.npci.org.in/PDF/npci/press-releases/2024/NPCI-Press-release-NPCI-Unveils-UPI-Safety-Awareness-Campaign-to-Champion-Safe-Digital-Payment-Practices.pdf",
-    },
-  ],
+  title: "UPI Chalega: PIN Safety Rule",
+  videoId: "QqTFVUIKoZI",
+  campaign: "Official public interest clip to understand the golden rule of UPI.",
 };
 
 const simulationChoices = [
@@ -149,354 +140,411 @@ export default function Education() {
 
   return (
     <Layout>
-      <div className="space-y-6 md:space-y-8">
-        <section className="glass-panel relative overflow-hidden rounded-[32px] px-6 py-7 md:px-8 md:py-8">
-          <div className="absolute inset-y-0 right-0 hidden w-1/2 bg-[radial-gradient(circle_at_top_right,rgba(14,165,233,0.12),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.12),transparent_35%)] md:block" />
-          <div className="relative grid gap-6 xl:grid-cols-[1.35fr_0.85fr]">
-            <div className="max-w-3xl space-y-5">
-              <div className="eyebrow">Prevention and Education</div>
-              <div className="space-y-3">
-                <h1 className="max-w-2xl text-4xl font-display font-extrabold leading-tight text-slate-950 md:text-5xl">
-                  Build scam resistance before the money leaves the account.
-                </h1>
-                <p className="max-w-2xl text-base leading-7 text-slate-600 md:text-lg">
-                  This route now behaves like a real field guide: working drills, guided walkthroughs, and response practice that first-time digital users can actually use.
-                </p>
-              </div>
+      <div className="max-w-[1400px] mx-auto pb-12 space-y-6">
+        
+        {/* TOP HEADER: Clean Title Section */}
+        <div className="mb-8">
+          <h1 className="text-4xl md:text-5xl font-display font-extrabold leading-tight text-foreground">
+            Prevention & Education Hub
+          </h1>
+          <p className="mt-2 text-lg text-muted-foreground">
+            Build scam resistance before the money leaves the account. Real drills and guided response practice.
+          </p>
+        </div>
 
-              <div className="grid gap-3 sm:grid-cols-3">
-                {quickStats.map((stat) => (
-                  <div key={stat.label} className="panel-muted rounded-2xl p-4">
-                    <p className="text-[11px] uppercase tracking-[0.18em] text-slate-500">{stat.label}</p>
-                    <p className="mt-2 text-3xl font-display font-bold text-slate-950">{stat.value}</p>
-                    <p className="mt-1 text-sm text-slate-600">{stat.note}</p>
-                  </div>
+        {/* MAIN MASTER GRID: 8 Columns Left (Primary), 4 Columns Right (Sidebar) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          {/* ======================= */}
+          {/* LEFT COLUMN (MAIN CONTENT) */}
+          {/* ======================= */}
+          <div className="lg:col-span-8 space-y-6">
+            
+            {/* HERO STATS */}
+            <motion.section 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="glass-panel relative overflow-hidden rounded-[32px] px-6 py-8 border-sky-500/20 bg-gradient-to-br from-sky-500/5 via-background to-emerald-500/5"
+            >
+              <div className="absolute inset-y-0 right-0 hidden w-1/2 bg-[radial-gradient(circle_at_top_right,rgba(14,165,233,0.12),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.12),transparent_35%)] md:block pointer-events-none" />
+              <div className="relative z-10 grid gap-4 sm:grid-cols-3">
+                {quickStats.map((stat, i) => (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.1 + 0.2 }}
+                    key={stat.label} 
+                    className="rounded-2xl p-5 border border-white/5 bg-background/50 backdrop-blur-md hover:bg-white/5 transition-colors"
+                  >
+                    <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{stat.label}</p>
+                    <p className="mt-2 text-3xl font-display font-bold text-foreground">{stat.value}</p>
+                    <p className="mt-1 text-sm text-muted-foreground/80">{stat.note}</p>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.section>
 
-            <div className="panel-strong rounded-[28px] p-5 md:p-6">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-[11px] uppercase tracking-[0.2em] text-sky-700">Trainer Console</p>
-                  <h2 className="mt-2 text-2xl font-display font-bold text-slate-950">Rapid Safety Script</h2>
-                </div>
-                <BadgeCheck className="mt-1 h-6 w-6 text-emerald-600" />
-              </div>
-
-              <div className="mt-6 space-y-4">
-                <div className="rounded-2xl border border-emerald-200 bg-emerald-50/90 p-4">
-                  <p className="text-sm font-semibold text-emerald-700">If you are being rushed, do not pay yet.</p>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">
-                    Pause, confirm the person, and re-read the prompt on the payment app. Scammers hate quiet verification.
-                  </p>
-                </div>
-
-                <div className="space-y-3">
-                  {walkthroughSteps.map((step, index) => (
-                    <div
-                      key={step}
-                      className={`flex items-center gap-3 rounded-2xl border px-4 py-3 ${
-                        index <= trainingStep ? "border-sky-200 bg-sky-50/90" : "border-slate-200 bg-white/80"
-                      }`}
-                    >
-                      <div
-                        className={`flex h-9 w-9 items-center justify-center rounded-xl text-sm font-mono font-bold ${
-                          index <= trainingStep ? "bg-sky-600 text-white" : "bg-slate-100 text-slate-600"
-                        }`}
-                      >
-                        0{index + 1}
-                      </div>
-                      <p className={`text-sm ${index <= trainingStep ? "text-slate-950" : "text-slate-600"}`}>{step}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
+            {/* SCENARIO LAB (Video + Simulation Combined) */}
+            <motion.section 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <Card className="glass-panel rounded-[28px] border-white/10 bg-background/50 backdrop-blur-sm overflow-hidden">
+                <CardHeader className="pb-4 border-b border-white/5 bg-white/5">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono uppercase tracking-[0.18em] text-slate-500">Walkthrough progress</span>
-                    <span className="text-sm font-semibold text-sky-700">{completion}%</span>
+                    <div>
+                      <Badge variant="outline" className="w-fit bg-sky-500/10 text-sky-500 border-sky-500/20 px-3 py-1 text-xs font-mono uppercase tracking-widest mb-2">
+                        Scenario Lab
+                      </Badge>
+                      <CardTitle className="text-2xl text-foreground flex items-center gap-2">
+                        <Video className="w-6 h-6 text-sky-500" />
+                        Interactive Training Simulation
+                      </CardTitle>
+                    </div>
                   </div>
-                  <div className="mt-3 h-2 rounded-full bg-slate-200">
-                    <div className="h-2 rounded-full bg-sky-600 transition-all duration-300" style={{ width: `${completion}%` }} />
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <Button
-                    className="flex-1 rounded-2xl bg-sky-600 text-white hover:bg-sky-700"
-                    onClick={handleWalkthroughAdvance}
-                    disabled={walkthroughComplete}
-                  >
-                    {trainingStep < 0
-                      ? "Start guided safety walkthrough"
-                      : walkthroughComplete
-                        ? "Walkthrough complete"
-                        : "Continue walkthrough"}
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="rounded-2xl border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-                    onClick={() => setTrainingStep(-1)}
-                  >
-                    Reset
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-          <Card className="glass-panel rounded-[28px] border-slate-200/80 bg-white/84">
-            <CardHeader className="pb-4">
-              <div className="eyebrow w-fit">Fraud Playbook</div>
-              <CardTitle className="mt-3 flex items-center gap-3 text-2xl text-slate-950">
-                <BookOpen className="h-6 w-6 text-sky-700" />
-                Common scam patterns in plain language
-              </CardTitle>
-              <p className="text-sm leading-6 text-slate-600">
-                Each pattern includes the emotional trigger, the exact risky action, and the safest response.
-              </p>
-            </CardHeader>
-            <CardContent>
-              <Accordion type="single" collapsible className="w-full space-y-3">
-                {EDUCATIONAL_CONTENT.map((item, index) => (
-                  <AccordionItem
-                    key={index}
-                    value={`item-${index}`}
-                    className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50/80 px-4"
-                  >
-                    <AccordionTrigger className="py-5 hover:no-underline">
-                      <div className="flex items-start gap-4 text-left">
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-sky-200 bg-sky-50 text-sky-700">
-                          <item.icon className="h-5 w-5" />
-                        </div>
-                        <div className="space-y-1">
-                          <div className="flex flex-wrap items-center gap-3">
-                            <span className="text-lg font-semibold text-slate-950">{item.title}</span>
-                            <span
-                              className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] ${
-                                item.riskLevel === "Critical"
-                                  ? "bg-rose-100 text-rose-700"
-                                  : item.riskLevel === "High"
-                                    ? "bg-amber-100 text-amber-700"
-                                    : "bg-yellow-100 text-yellow-700"
-                              }`}
-                            >
-                              {item.riskLevel} risk
-                            </span>
-                          </div>
-                          <p className="text-sm text-slate-600">{item.tell}</p>
-                        </div>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="pb-5 pl-16 pr-4 text-sm leading-7 text-slate-600">
-                      <p>{item.description}</p>
-                      <Button
-                        size="sm"
-                        className="mt-4 rounded-xl bg-sky-600 text-white hover:bg-sky-700"
-                        onClick={() => setSelectedPattern(item)}
-                      >
-                        Practice response
-                      </Button>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </CardContent>
-          </Card>
-
-          <div className="space-y-6">
-            <Card className="glass-panel rounded-[28px] border-slate-200/80 bg-white/84">
-              <CardHeader className="pb-4">
-                <div className="eyebrow w-fit">Scenario Lab</div>
-                <CardTitle className="mt-3 text-2xl text-slate-950">Interactive simulation</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="overflow-hidden rounded-[24px] border border-slate-200 bg-[linear-gradient(135deg,rgba(186,230,253,0.95),rgba(248,250,252,0.98)_45%,rgba(220,252,231,0.92))]">
-                  <div className="relative overflow-hidden pb-[56.25%]">
-                    <video
-                      className="absolute inset-0 h-full w-full bg-black object-cover"
-                      src={EDUCATION_VIDEO.videoUrl}
+                </CardHeader>
+                <CardContent className="p-0">
+                  {/* The Video Embed */}
+                  <div className="relative w-full aspect-video bg-black">
+                    <iframe
+                      className="absolute inset-0 h-full w-full object-cover"
+                      src={`https://www.youtube.com/embed/${EDUCATION_VIDEO.videoId}?rel=0`}
                       title={EDUCATION_VIDEO.title}
-                      controls
-                      preload="metadata"
-                      playsInline
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
                     />
                   </div>
-                  <div className="flex items-center justify-between px-5 pt-5">
-                    <span className="rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-slate-600">
-                      Scenario 01
-                    </span>
-                    <PlayCircle className="h-11 w-11 text-sky-700" />
-                  </div>
-                  <div className="px-5 pb-5 pt-4">
-                    <p className="text-xl font-display font-bold text-slate-950">The Fake Delivery Agent</p>
-                    <p className="mt-2 max-w-sm text-sm leading-6 text-slate-600">
-                      A caller asks you to scan a QR code for a missed parcel fee. The right move is to verify the merchant and refuse any urgent PIN entry.
+                  
+                  {/* Video Description */}
+                  <div className="p-6 bg-background/80">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="rounded-full border border-sky-500/20 bg-sky-500/10 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-sky-500 font-mono">
+                        Scenario 01
+                      </span>
+                    </div>
+                    <p className="text-xl font-display font-bold text-foreground">{EDUCATION_VIDEO.title}</p>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                      Watch this official public interest clip to understand the golden rule of UPI: You only need to enter your UPI PIN to <strong>send</strong> money, never to receive it. Always verify the receiver before you pay.
                     </p>
                   </div>
-                </div>
 
-                <div className="mt-3">
-                  <p className="text-sm text-slate-600">{EDUCATION_VIDEO.campaign}</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {EDUCATION_VIDEO.links.map((link) => (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition-colors hover:bg-slate-50"
-                      >
-                        {link.label}
-                      </a>
-                    ))}
+                  {/* The Simulation Expansion */}
+                  <div className="p-6 border-t border-white/5 bg-sky-500/5">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-semibold flex items-center gap-2 text-foreground">
+                        <PlayCircle className="h-5 w-5 text-sky-500" />
+                        Live Drill Practice
+                      </h3>
+                    </div>
+                    
+                    <Button
+                      className="w-full md:w-auto px-8 rounded-2xl bg-sky-600 text-white hover:bg-sky-700 shadow-lg shadow-sky-500/20 transition-all active:scale-95"
+                      onClick={handleSimulationToggle}
+                    >
+                      {simulationStarted ? "Reset Simulation" : "Start Live Simulation"}
+                    </Button>
+
+                    <AnimatePresence>
+                      {simulationStarted && (
+                        <motion.div 
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="mt-6 rounded-[24px] border border-white/10 bg-background/80 p-6 shadow-inner">
+                            <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">Simulation prompt</p>
+                            <p className="mt-3 text-xl font-display font-semibold text-foreground">
+                              "Sir, your package is stuck. Scan this QR to release it right now."
+                            </p>
+                            <div className="mt-6 grid gap-3 md:grid-cols-1">
+                              {simulationChoices.map((choice, index) => {
+                                const isSelected = selectedChoice === index;
+                                return (
+                                  <button
+                                    key={choice.label}
+                                    type="button"
+                                    onClick={() => setSelectedChoice(index)}
+                                    className={`rounded-2xl border px-5 py-4 text-left text-sm transition-all duration-300 ${
+                                      isSelected
+                                        ? choice.isCorrect
+                                          ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-400 scale-[1.01]"
+                                          : "border-rose-500/50 bg-rose-500/10 text-rose-400 scale-[1.01]"
+                                        : "border-white/10 bg-white/5 text-muted-foreground hover:bg-white/10 hover:border-white/20"
+                                    }`}
+                                  >
+                                    {choice.label}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                            
+                            <AnimatePresence>
+                              {selectedChoice !== null && (
+                                <motion.div
+                                  initial={{ opacity: 0, y: 10 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  className={`mt-6 rounded-2xl border p-5 text-sm leading-6 ${
+                                    simulationChoices[selectedChoice].isCorrect
+                                      ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
+                                      : "border-rose-500/30 bg-rose-500/10 text-rose-300"
+                                  }`}
+                                >
+                                  {simulationChoices[selectedChoice].feedback}
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                            
+                            <div className="mt-6 flex flex-wrap gap-2">
+                              <Badge variant="outline" className="border-rose-500/30 text-rose-400 bg-rose-500/10 px-3 py-1">Wrong: scan immediately</Badge>
+                              <Badge variant="outline" className="border-emerald-500/30 text-emerald-400 bg-emerald-500/10 px-3 py-1">Right: verify independently first</Badge>
+                              <Badge variant="outline" className="border-sky-500/30 text-sky-400 bg-sky-500/10 px-3 py-1">Right: never enter PIN for strangers</Badge>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-                </div>
+                </CardContent>
+              </Card>
+            </motion.section>
 
-                <Button
-                  className="mt-4 w-full rounded-2xl bg-emerald-600 text-white hover:bg-emerald-700"
-                  onClick={handleSimulationToggle}
-                >
-                  {simulationStarted ? "Hide training simulation" : "Launch training simulation"}
-                </Button>
+            {/* RED FLAG DRILL */}
+            <motion.section 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <Card className="glass-panel rounded-[28px] border-white/10 bg-background/50 backdrop-blur-sm">
+                <CardHeader className="pb-6">
+                  <Badge variant="outline" className="w-fit mx-auto bg-amber-500/10 text-amber-500 border-amber-500/20 px-3 py-1 text-xs font-mono uppercase tracking-widest">
+                    Red Flag Drill
+                  </Badge>
+                  <CardTitle className="mt-3 text-3xl font-display text-foreground text-center">What to notice in the first 10 seconds</CardTitle>
+                </CardHeader>
+                <CardContent className="grid gap-6 md:grid-cols-3">
+                  {drillCards.map((card) => (
+                    <div key={card.title} className="group rounded-[24px] border border-white/10 bg-background/40 p-6 transition-all duration-300 hover:bg-white/5 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/5">
+                      <div className="flex flex-col gap-4">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-amber-500/20 bg-amber-500/10 text-amber-400 group-hover:scale-110 transition-transform duration-300">
+                          <card.icon className="h-7 w-7" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-foreground">{card.title}</h3>
+                      </div>
+                      <p className="mt-4 text-sm leading-6 text-muted-foreground">{card.description}</p>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </motion.section>
 
-                {simulationStarted && (
-                  <div className="mt-4 rounded-[24px] border border-slate-200 bg-slate-50/90 p-4">
-                    <p className="text-xs font-mono uppercase tracking-[0.18em] text-slate-500">Simulation prompt</p>
-                    <p className="mt-3 text-base font-semibold text-slate-950">
-                      "Sir, your package is stuck. Scan this QR to release it right now."
-                    </p>
-                    <div className="mt-4 grid gap-2">
-                      {simulationChoices.map((choice, index) => {
-                        const isSelected = selectedChoice === index;
-                        return (
-                          <button
-                            key={choice.label}
-                            type="button"
-                            onClick={() => setSelectedChoice(index)}
-                            className={`rounded-2xl border px-4 py-3 text-left text-sm transition-colors ${
-                              isSelected
-                                ? choice.isCorrect
-                                  ? "border-emerald-200 bg-emerald-50 text-emerald-800"
-                                  : "border-rose-200 bg-rose-50 text-rose-800"
-                                : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+          </div>
+
+          {/* ======================= */}
+          {/* RIGHT COLUMN (SIDEBAR)  */}
+          {/* ======================= */}
+          <div className="lg:col-span-4 space-y-6">
+            
+            {/* TRAINER CONSOLE */}
+            <motion.section 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <Card className="rounded-[28px] border-emerald-500/20 bg-emerald-500/5 backdrop-blur-sm shadow-xl shadow-emerald-500/5">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-[11px] uppercase tracking-[0.2em] text-emerald-500">Trainer Console</p>
+                      <h2 className="mt-2 text-2xl font-display font-bold text-foreground">Rapid Safety Script</h2>
+                    </div>
+                    <BadgeCheck className="mt-1 h-6 w-6 text-emerald-500" />
+                  </div>
+
+                  <div className="mt-6 space-y-4">
+                    <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+                      <p className="text-sm font-semibold text-emerald-400">If you are being rushed, do not pay yet.</p>
+                      <p className="mt-2 text-sm leading-6 text-emerald-500/80">
+                        Pause, confirm the person, and re-read the prompt on the payment app. Scammers hate quiet verification.
+                      </p>
+                    </div>
+
+                    <div className="space-y-3">
+                      {walkthroughSteps.map((step, index) => (
+                        <div
+                          key={step}
+                          className={`flex items-start gap-3 rounded-2xl border px-4 py-3 transition-colors ${
+                            index <= trainingStep ? "border-sky-500/30 bg-sky-500/10" : "border-white/5 bg-background/40"
+                          }`}
+                        >
+                          <div
+                            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-mono font-bold mt-0.5 ${
+                              index <= trainingStep ? "bg-sky-500 text-white" : "bg-white/10 text-muted-foreground"
                             }`}
                           >
-                            {choice.label}
-                          </button>
-                        );
-                      })}
+                            0{index + 1}
+                          </div>
+                          <p className={`text-sm leading-6 ${index <= trainingStep ? "text-foreground" : "text-muted-foreground"}`}>{step}</p>
+                        </div>
+                      ))}
                     </div>
-                    {selectedChoice !== null && (
-                      <div
-                        className={`mt-4 rounded-2xl border p-4 text-sm leading-6 ${
-                          simulationChoices[selectedChoice].isCorrect
-                            ? "border-emerald-200 bg-emerald-50 text-emerald-800"
-                            : "border-rose-200 bg-rose-50 text-rose-800"
-                        }`}
+
+                    <div className="rounded-2xl border border-white/5 bg-background/50 p-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">Walkthrough progress</span>
+                        <span className="text-sm font-semibold text-sky-400">{completion}%</span>
+                      </div>
+                      <div className="mt-3 h-2 rounded-full bg-white/5 overflow-hidden">
+                        <div className="h-full rounded-full bg-sky-500 transition-all duration-500 ease-out" style={{ width: `${completion}%` }} />
+                      </div>
+                    </div>
+
+                    <div className="flex gap-3">
+                      <Button
+                        className="flex-1 rounded-2xl bg-sky-600 text-white hover:bg-sky-700 shadow-lg shadow-sky-500/20 text-xs"
+                        onClick={handleWalkthroughAdvance}
+                        disabled={walkthroughComplete}
                       >
-                        {simulationChoices[selectedChoice].feedback}
-                      </div>
-                    )}
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      <Badge className="bg-rose-100 text-rose-700">Wrong: scan immediately</Badge>
-                      <Badge className="bg-emerald-100 text-emerald-700">Right: verify independently first</Badge>
-                      <Badge className="bg-sky-100 text-sky-700">Right: never enter your PIN for a stranger's fee request</Badge>
+                        {trainingStep < 0
+                          ? "Start Walkthrough"
+                          : walkthroughComplete
+                            ? "Complete"
+                            : "Continue"}
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="rounded-2xl border-white/10 bg-transparent text-muted-foreground hover:bg-white/5 px-4"
+                        onClick={() => setTrainingStep(-1)}
+                      >
+                        Reset
+                      </Button>
                     </div>
                   </div>
-                )}
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </motion.section>
 
-            <Card className="glass-panel rounded-[28px] border-emerald-200 bg-white/84">
-              <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-3 text-xl text-slate-950">
-                  <ShieldCheck className="h-5 w-5 text-emerald-600" />
-                  Four-point safety checklist
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {checklist.map((item) => (
-                  <div key={item} className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50/90 p-4">
-                    <div className="mt-1 h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                    <p className="text-sm leading-6 text-slate-600">{item}</p>
+            {/* SAFETY CHECKLIST */}
+            <motion.section 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <Card className="glass-panel rounded-[28px] border-white/10 bg-background/50 backdrop-blur-sm">
+                <CardHeader className="pb-4">
+                  <CardTitle className="flex items-center gap-3 text-xl text-foreground">
+                    <ShieldCheck className="h-6 w-6 text-emerald-500" />
+                    4-Point Safety Checklist
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {checklist.map((item) => (
+                    <div key={item} className="flex items-start gap-3 rounded-2xl border border-white/5 bg-background/40 p-4 transition-colors hover:bg-white/5">
+                      <div className="mt-1 h-2 w-2 rounded-full bg-emerald-500 shrink-0 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+                      <p className="text-sm leading-6 text-muted-foreground">{item}</p>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </motion.section>
+
+            {/* FRAUD PLAYBOOK (Accordion) */}
+            <motion.section 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <Card className="glass-panel rounded-[28px] border-sky-500/20 bg-sky-500/5 backdrop-blur-sm">
+                <CardHeader className="pb-4">
+                  <Badge variant="outline" className="w-fit bg-sky-500/10 text-sky-500 border-sky-500/20 px-3 py-1 text-xs font-mono uppercase tracking-widest">
+                    Fraud Playbook
+                  </Badge>
+                  <CardTitle className="mt-3 flex items-center gap-3 text-xl text-foreground">
+                    <BookOpen className="h-5 w-5 text-sky-500" />
+                    Common Scam Patterns
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Accordion type="single" collapsible className="w-full space-y-3" defaultValue="item-0">
+                    {EDUCATIONAL_CONTENT.map((item, index) => (
+                      <AccordionItem
+                        key={index}
+                        value={`item-${index}`}
+                        className="overflow-hidden rounded-2xl border border-white/10 bg-background/60 px-4 transition-colors hover:bg-white/5"
+                      >
+                        <AccordionTrigger className="py-4 hover:no-underline" onClick={() => setSelectedPattern(item)}>
+                          <div className="flex items-center gap-4 text-left w-full pr-2">
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-sky-500/20 bg-sky-500/10 text-sky-400">
+                              <item.icon className="h-5 w-5" />
+                            </div>
+                            <div className="flex-1">
+                              <span className="text-base font-semibold text-foreground block">{item.title}</span>
+                              <span className={`inline-block mt-1 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.1em] ${
+                                item.riskLevel === "Critical" ? "bg-rose-500/10 text-rose-400" : 
+                                item.riskLevel === "High" ? "bg-amber-500/10 text-amber-400" : "bg-yellow-500/10 text-yellow-400"
+                              }`}>
+                                {item.riskLevel} Risk
+                              </span>
+                            </div>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent className="pb-4 pt-1 text-sm leading-6 text-muted-foreground border-t border-white/5 mt-2">
+                          <p className="mt-2">{item.description}</p>
+                          <p className="mt-2 font-medium text-foreground/80">Red Flag: {item.tell}</p>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </CardContent>
+              </Card>
+            </motion.section>
+
+            {/* RESPONSE PRACTICE (Sticky to follow scroll) */}
+            <motion.section 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="sticky top-6 pb-6"
+            >
+              <Card className="glass-panel rounded-[28px] border-white/10 bg-background/50 backdrop-blur-sm shadow-2xl">
+                <CardHeader className="pb-2">
+                  <Badge variant="outline" className="w-fit bg-emerald-500/10 text-emerald-500 border-emerald-500/20 px-3 py-1 text-xs font-mono uppercase tracking-widest">
+                    Response Practice
+                  </Badge>
+                  <CardTitle className="mt-3 text-xl text-foreground">{selectedPattern.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4 pt-4">
+                  <div className="rounded-[20px] border border-sky-500/20 bg-sky-500/5 p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <selectedPattern.icon className="h-4 w-4 text-sky-400" />
+                      <span className="text-xs font-bold uppercase tracking-[0.16em] text-sky-500">Best Response</span>
+                    </div>
+                    <p className="text-sm leading-6 text-foreground/90">{selectedPattern.safeResponse}</p>
                   </div>
-                ))}
-              </CardContent>
-            </Card>
+
+                  <div className="space-y-2">
+                    {[
+                      "Stop and read the app prompt slowly.",
+                      "Verify the human through an independent channel.",
+                      "Report the attempt if manipulative.",
+                    ].map((item, index) => (
+                      <div key={item} className="flex gap-3 rounded-[20px] border border-white/5 bg-background/40 p-4 items-center">
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sky-500/20 border border-sky-500/30 font-mono text-xs font-bold text-sky-400">
+                          {index + 1}
+                        </div>
+                        <h3 className="text-sm font-medium text-foreground/90">{item}</h3>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.section>
+
           </div>
-        </section>
-
-        <section className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-          <Card className="glass-panel rounded-[28px] border-slate-200/80 bg-white/84">
-            <CardHeader className="pb-2">
-              <div className="eyebrow w-fit">Red Flag Drill</div>
-              <CardTitle className="mt-3 text-2xl text-slate-950">What to notice in the first 10 seconds</CardTitle>
-            </CardHeader>
-            <CardContent className="grid gap-4">
-              {drillCards.map((card) => (
-                <div key={card.title} className="group rounded-[24px] border border-slate-200 bg-slate-50/90 p-5 transition-colors hover:bg-white">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-emerald-200 bg-emerald-50 text-emerald-700">
-                      <card.icon className="h-5 w-5" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-slate-950">{card.title}</h3>
-                  </div>
-                  <p className="mt-3 text-sm leading-6 text-slate-600">{card.description}</p>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-
-          <Card className="glass-panel rounded-[28px] border-slate-200/80 bg-white/84">
-            <CardHeader className="pb-2">
-              <div className="eyebrow w-fit">Response Practice</div>
-              <CardTitle className="mt-3 text-2xl text-slate-950">{selectedPattern.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="rounded-[24px] border border-slate-200 bg-slate-50/90 p-5">
-                <div className="flex items-center gap-3">
-                  <selectedPattern.icon className="h-5 w-5 text-sky-700" />
-                  <span className="text-sm font-semibold uppercase tracking-[0.16em] text-slate-500">Best response</span>
-                </div>
-                <p className="mt-3 text-base leading-7 text-slate-700">{selectedPattern.safeResponse}</p>
-              </div>
-
-              <div className="space-y-3">
-                {[
-                  "Stop the conversation and read the app prompt slowly.",
-                  "Verify the human or merchant through an independent channel.",
-                  "Report the attempt if the request was fake or manipulative.",
-                ].map((item, index) => (
-                  <div key={item} className="flex gap-4 rounded-[24px] border border-slate-200 bg-white/90 p-5">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-sky-600 font-mono text-sm font-bold text-white">
-                      0{index + 1}
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h3 className="text-base font-semibold text-slate-950">{item}</h3>
-                        <ArrowRight className="h-4 w-4 text-sky-500" />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="rounded-[24px] border border-emerald-200 bg-emerald-50/90 p-5">
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-emerald-600" />
-                  <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-700">Outcome</p>
-                </div>
-                <p className="mt-3 text-sm leading-6 text-slate-700">
-                  This practice module now updates when you click any "Practice response" button in the fraud playbook, so each scenario has a working response flow.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
+        </div>
       </div>
     </Layout>
   );

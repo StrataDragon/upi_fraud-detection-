@@ -12,6 +12,7 @@ import Fraud from "@/pages/fraud";
 import AdvancedAnalytics from "@/pages/advanced-analytics";
 import UserProfiles from "@/pages/user-profiles";
 import TypologyRadar from "@/pages/typology-radar";
+import Prevention from "@/pages/prevention";
 
 // Global overlays
 import { XAISlideOutPanel } from "@/components/domain/XAISlideOutPanel";
@@ -28,6 +29,7 @@ function Router() {
       <Route path="/typology-radar" component={TypologyRadar} />
       <Route path="/user-profiles" component={UserProfiles} />
       <Route path="/education" component={Education} />
+      <Route path="/prevention" component={Prevention} />
       <Route path="/fraud" component={Fraud} />
       <Route component={NotFound} />
     </Switch>
